@@ -26,18 +26,26 @@ const fetchProducts = async () => {
 };
 
 
-  const saveProduct = async (product) => {
-    const url = product.id ? 'update.php' : 'add.php';
+const saveProduct = async (product) => {
+  const url = product.id ? 'update.php' : 'add.php';
 
-    await fetch(`${API_BASE}/${url}`, {
+  try {
+    const response = await fetch(`${API_BASE}/${url}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(product),
     });
 
+    const result = await response.json();
+    console.log('✅ Product save response:', result);
+
     setEditingProduct(null);
     fetchProducts();
-  };
+  } catch (error) {
+    console.error('❌ Error saving product:', error);
+  }
+};
+
 
   const deleteProduct = async (id) => {
     if (!window.confirm('Are you sure you want to delete this product?')) return;
