@@ -7,13 +7,24 @@ function App() {
   const [editingProduct, setEditingProduct] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const API_BASE = 'http://localhost/inventory-api';
+  //const API_BASE = 'http://localhost/inventory-api';
 
-  const fetchProducts = async () => {
+  //const API_BASE = 'https://phpcrudonreact.infinityfreeapp.com/inventory-api';
+  
+  const API_BASE = 'https://inventory-backend.onrender.com';
+
+
+const fetchProducts = async () => {
+  try {
     const res = await fetch(`${API_BASE}/read.php`);
     const data = await res.json();
+    console.log("Fetched data:", data); // 👈 Check this in browser dev tools
     setProducts(data);
-  };
+  } catch (error) {
+    console.error("Fetch error:", error); // 👈 Check if error is here
+  }
+};
+
 
   const saveProduct = async (product) => {
     const url = product.id ? 'update.php' : 'add.php';
