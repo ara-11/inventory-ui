@@ -10,8 +10,8 @@ function App() {
   //const API_BASE = 'http://localhost/inventory-api';
 
   //const API_BASE = 'https://phpcrudonreact.infinityfreeapp.com/inventory-api';
-  
-  const API_BASE = 'https://inventory-backend.onrender.com';
+
+  const API_BASE = 'https://inventory-api-ulj3.onrender.com';
 
 
 const fetchProducts = async () => {
