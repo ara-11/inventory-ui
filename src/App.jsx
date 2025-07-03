@@ -30,6 +30,7 @@ const saveProduct = async (product) => {
   const url = product.id ? 'update.php' : 'add.php';
 
   try {
+    console.log("Saving product:", product);
     const response = await fetch(`${API_BASE}/${url}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
