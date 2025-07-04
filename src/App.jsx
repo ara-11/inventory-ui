@@ -51,7 +51,7 @@ const saveProduct = async (product) => {
 const deleteProduct = async (id) => {
   if (!window.confirm('Are you sure you want to delete this product?')) return;
 
-  console.log('🗑️ Deleting product with ID:', id);//added console log to identify error
+  console.log("🧪 Deleting ID:", typeof id, id); //Make sure the id being passed to deleteProduct() is also 19, and a number — not a string or something undefined.
 
 try {
   const res = await fetch(`${API_BASE}/delete.php`, {
