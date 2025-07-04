@@ -108,14 +108,16 @@ return (
 
       {/* Table */}
         <table>
-          <thead>
-            <tr>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Action</th>
-            </tr>
-          </thead>
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Action</th>
+  </tr>
+</thead>
+
           <tbody>
             {products
               .filter((p) =>
@@ -123,9 +125,10 @@ return (
               )
               .map((p) => (
     <tr key={p.id}>
-      <td>{p.name}</td>
-      <td>{p.quantity}</td>
-      <td>₱{p.price}</td>
+  <td>{p.id}</td>
+  <td>{p.name}</td>
+  <td>{p.quantity}</td>
+  <td>₱{p.price}</td>
       <td className="action-buttons">
         <button className="edit-button" onClick={() => setEditingProduct(p)}>
           Edit
