@@ -48,21 +48,31 @@ const saveProduct = async (product) => {
 };
 
 
-  const deleteProduct = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this product?')) return;
+const deleteProduct = async (id) => {
+  if (!window.confirm('Are you sure you want to delete this product?')) return;
 
-    await fetch(`${API_BASE}/delete.php`, {
+  console.log('🗑️ Deleting product with ID:', id);//added console log to identify error
+
+  try {
+    const res = await fetch(`${API_BASE}/delete.php`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id }),
     });
 
-    fetchProducts();
-  };
+    const data = await res.json();
+    console.log('✅ Delete response:', data);
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+    fetchProducts(); // Refresh the product list
+  } catch (error) {
+    console.error('❌ Delete error:', error);
+  }
+};
+
+useEffect(() => {
+  fetchProducts();
+}, []);
+
 
 
   
