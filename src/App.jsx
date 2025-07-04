@@ -60,11 +60,14 @@ try {
     body: JSON.stringify({ id }),
   });
 
-  const text = await res.text(); // get raw response
-  console.log('🔍 Raw response from delete.php:', text);
-
-  const data = JSON.parse(text); // try parsing manually
+const contentType = res.headers.get("content-type");
+if (contentType && contentType.includes("application/json")) {
+  const data = await res.json();
   console.log('✅ Parsed JSON:', data);
+} else {
+  const text = await res.text();
+  throw new Error("Expected JSON but received: " + text);
+}
 
   fetchProducts();
 } catch (error) {
