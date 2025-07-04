@@ -9,6 +9,7 @@ function App() {
   const [error, setError] = useState(null);
 
   const API_BASE = 'https://inventory-api-ulj3.onrender.com';
+  
 
   const fetchProducts = async () => {
     setLoading(true);
