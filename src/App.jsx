@@ -69,8 +69,8 @@ if (contentType && contentType.includes("application/json")) {
   throw new Error("Expected JSON but received: " + text);
 }
 
-setProducts([]); 
-fetchProducts();
+setProducts([]); // force clear list before reloading
+await fetchProducts(); // Then re-fetch fresh data
 } catch (error) {
   console.error('❌ Delete error (possibly HTML instead of JSON):', error);
 }
