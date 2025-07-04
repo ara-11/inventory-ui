@@ -53,20 +53,24 @@ const deleteProduct = async (id) => {
 
   console.log('🗑️ Deleting product with ID:', id);//added console log to identify error
 
-  try {
-    const res = await fetch(`${API_BASE}/delete.php`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id }),
-    });
+try {
+  const res = await fetch(`${API_BASE}/delete.php`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id }),
+  });
 
-    const data = await res.json();
-    console.log('✅ Delete response:', data);
+  const text = await res.text(); // get raw response
+  console.log('🔍 Raw response from delete.php:', text);
 
-    fetchProducts(); // Refresh the product list
-  } catch (error) {
-    console.error('❌ Delete error:', error);
-  }
+  const data = JSON.parse(text); // try parsing manually
+  console.log('✅ Parsed JSON:', data);
+
+  fetchProducts();
+} catch (error) {
+  console.error('❌ Delete error (possibly HTML instead of JSON):', error);
+}
+
 };
 
 useEffect(() => {
