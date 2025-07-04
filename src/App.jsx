@@ -55,7 +55,7 @@ function App() {
     console.log("🗑️ Deleting ID:", typeof id, id);
 
     try {
-      const res = await fetch(`${API_BASE}/delete.php`, {
+      const res = await fetch(`${API_BASE}/delet.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id }),
