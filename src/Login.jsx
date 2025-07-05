@@ -4,22 +4,32 @@ function Login({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
-    const res = await fetch("https://inventory-api-ulj3.onrender.com/login.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include", // ⚠️ Required for session cookies
-      body: JSON.stringify({ username, password }),
-    });
+    try {
+      const res = await fetch("https://inventory-api-ulj3.onrender.com/login.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // ✅ Required for session cookies
+        body: JSON.stringify({ username, password }),
+      });
 
-    if (res.ok) {
-      onLogin(); // tells App we're logged in
-    } else {
-      setError("❌ Invalid username or password");
+      const data = await res.json();
+
+      if (res.ok) {
+        onLogin(); // ✅ Notify App we're logged in
+      } else {
+        setError(data.error || "❌ Invalid username or password");
+      }
+    } catch (err) {
+      setError("❌ Network error. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -33,6 +43,7 @@ function Login({ onLogin }) {
           className="border p-2 rounded"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          disabled={loading}
         />
         <input
           type="password"
@@ -40,13 +51,15 @@ function Login({ onLogin }) {
           className="border p-2 rounded"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          disabled={loading}
         />
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <button
           type="submit"
-          className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+          className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 disabled:opacity-50"
+          disabled={loading}
         >
-          Login
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>
