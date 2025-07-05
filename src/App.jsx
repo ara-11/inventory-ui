@@ -159,11 +159,10 @@ function App() {
                 </tr>
               ))}
           </tbody>
+
         </table>
         
       )}
-
-
 
     {/* ✅ Move logout here, outside the table */}
     <div className="flex justify-center mt-4 mb-6">
@@ -173,7 +172,7 @@ function App() {
       >
         🚪 Logout
       </button>
-
+    </div>
     </div>
   );
 }
