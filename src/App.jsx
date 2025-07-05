@@ -39,6 +39,21 @@ function App() {
       setLoading(false);
     }
   };
+  
+  const logout = async () => {
+  try {
+    const res = await fetch(`${API_BASE}/logout.php`, {
+      method: "POST",
+      credentials: "include",
+    });
+    const data = await res.json();
+    console.log(data.message);
+    setLoggedIn(false); // 🔐 Forces re-render to show Login component
+  } catch (error) {
+    console.error("Logout failed", error);
+  }
+};
+
 
   const saveProduct = async (product) => {
     const url = product.id ? 'update.php' : 'add.php';
@@ -97,6 +112,12 @@ function App() {
     <div className="container">
       <h1>📦 Inventory System</h1>
 
+    <button
+      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mb-4"
+      onClick={logout}
+    >
+      🚪 Logout
+    </button>
       <ProductForm
         onSave={saveProduct}
         productToEdit={editingProduct}
