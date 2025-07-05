@@ -163,13 +163,15 @@ function App() {
       )}
 
       
-<div>    <button
-      className="action-buttons"
-      onClick={logout}
-    >
-      🚪 Logout
-    </button>
-    </div>
+<div className="flex justify-center mt-4 mb-6">
+  <button
+    className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded"
+    onClick={logout}
+  >
+    🚪 Logout
+  </button>
+</div>
+
 
     </div>
   );
