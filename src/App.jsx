@@ -164,12 +164,12 @@ function App() {
 
       
     <button
-      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mb-4"
+      className="bg-red-500 hover:bg-red-600 text-white font-bold py-10 px-10 rounded mb-8"
       onClick={logout}
     >
       🚪 Logout
     </button>
-    
+
     </div>
   );
 }
