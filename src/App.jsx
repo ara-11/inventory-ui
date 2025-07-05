@@ -8,7 +8,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false); // ✅ Add this
+  const [loggedIn, setLoggedIn] = useState(false); // add this line
 
   const API_BASE = 'https://inventory-api-ulj3.onrender.com';
 
