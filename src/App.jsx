@@ -39,7 +39,7 @@ function App() {
       setLoading(false);
     }
   };
-  
+
   const logout = async () => {
   try {
     const res = await fetch(`${API_BASE}/logout.php`, {
@@ -112,12 +112,7 @@ function App() {
     <div className="container">
       <h1>📦 Inventory System</h1>
 
-    <button
-      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mb-4"
-      onClick={logout}
-    >
-      🚪 Logout
-    </button>
+
       <ProductForm
         onSave={saveProduct}
         productToEdit={editingProduct}
@@ -166,6 +161,15 @@ function App() {
           </tbody>
         </table>
       )}
+
+      
+    <button
+      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mb-4"
+      onClick={logout}
+    >
+      🚪 Logout
+    </button>
+    
     </div>
   );
 }
