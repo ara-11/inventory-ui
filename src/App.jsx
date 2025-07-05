@@ -159,10 +159,7 @@ function App() {
                 </tr>
               ))}
           </tbody>
-        </table>
-      )}
-
-      
+                
 <div className="flex justify-center mt-4 mb-6">
   <button
     className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded"
@@ -171,6 +168,11 @@ function App() {
     🚪 Logout
   </button>
 </div>
+        </table>
+        
+      )}
+
+
 
 
     </div>
