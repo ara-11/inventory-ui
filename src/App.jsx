@@ -163,12 +163,13 @@ function App() {
       )}
 
       
-    <button
+<div>    <button
       className="action-buttons"
       onClick={logout}
     >
       🚪 Logout
     </button>
+    </div>
 
     </div>
   );
