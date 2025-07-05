@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProductForm from './ProductForm';
+import Login from './Login'; // ✅ Add this
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -7,17 +8,29 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false); // ✅ Add this
 
   const API_BASE = 'https://inventory-api-ulj3.onrender.com';
-  
+
+  // ✅ Check session on load
+  useEffect(() => {
+    fetch(`${API_BASE}/check_session.php`, {
+      credentials: "include",
+    })
+      .then((res) => {
+        if (res.ok) setLoggedIn(true);
+      })
+      .catch(() => {});
+  }, []);
 
   const fetchProducts = async () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`${API_BASE}/read.php`);
+      const res = await fetch(`${API_BASE}/read.php`, {
+        credentials: "include", // ✅ Include session cookie
+      });
       const data = await res.json();
-      console.log("📦 Fetched data:", data);
       setProducts(data);
     } catch (error) {
       console.error("❌ Fetch error:", error);
@@ -31,20 +44,17 @@ function App() {
     const url = product.id ? 'update.php' : 'add.php';
 
     try {
-      console.log("💾 Saving product:", product);
       const response = await fetch(`${API_BASE}/${url}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: "include", // ✅ Keep session
         body: JSON.stringify(product),
       });
 
       const result = await response.json();
-      console.log('✅ Product save response:', result);
-
       setEditingProduct(null);
       fetchProducts();
     } catch (error) {
-      console.error('❌ Error saving product:', error);
       alert("An error occurred while saving the product.");
     }
   };
@@ -52,12 +62,11 @@ function App() {
   const deleteProduct = async (id) => {
     if (!window.confirm('Are you sure you want to delete this product?')) return;
 
-    console.log("🗑️ Deleting ID:", typeof id, id);
-
     try {
       const res = await fetch(`${API_BASE}/delete.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: "include", // ✅ Keep session
         body: JSON.stringify({ id }),
       });
 
@@ -72,14 +81,17 @@ function App() {
 
       fetchProducts();
     } catch (error) {
-      console.error('❌ Delete error:', error);
       alert("An error occurred while deleting the product.");
     }
   };
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    if (loggedIn) fetchProducts();
+  }, [loggedIn]);
+
+  if (!loggedIn) {
+    return <Login onLogin={() => setLoggedIn(true)} />;
+  }
 
   return (
     <div className="container">
@@ -99,11 +111,9 @@ function App() {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
 
-      {/* Loading + Error States */}
       {loading && <p>⏳ Loading products...</p>}
       {error && <p className="text-red-500">❌ {error}</p>}
 
-      {/* Products Table */}
       {!loading && products.length > 0 && (
         <table>
           <thead>
@@ -115,27 +125,20 @@ function App() {
               <th>Action</th>
             </tr>
           </thead>
-
           <tbody>
             {products
               .filter((p) =>
                 p.name.toLowerCase().includes(searchTerm.toLowerCase())
               )
               .map((p) => (
-                <tr key={p.id} style={{
-                  backgroundColor: editingProduct?.id === p.id ? '#eef' : 'transparent'
-                }}>
+                <tr key={p.id} style={{ backgroundColor: editingProduct?.id === p.id ? '#eef' : 'transparent' }}>
                   <td>{p.id}</td>
                   <td>{p.name}</td>
                   <td>{p.quantity}</td>
                   <td>₱{p.price}</td>
                   <td className="action-buttons">
-                    <button className="edit-button" onClick={() => setEditingProduct(p)}>
-                      Edit
-                    </button>
-                    <button className="delete-button" onClick={() => deleteProduct(p.id)}>
-                      Delete
-                    </button>
+                    <button className="edit-button" onClick={() => setEditingProduct(p)}>Edit</button>
+                    <button className="delete-button" onClick={() => deleteProduct(p.id)}>Delete</button>
                   </td>
                 </tr>
               ))}
