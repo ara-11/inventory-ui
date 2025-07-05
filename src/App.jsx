@@ -164,7 +164,7 @@ function App() {
 
       
     <button
-      className="w-[300px] border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 mb-4"
+      className="action-buttons"
       onClick={logout}
     >
       🚪 Logout
