@@ -135,7 +135,7 @@ return (
           <thead>
             <tr>
               <th>ID</th>
-              <th>Names</th>
+              <th>Name</th>
               <th>Quantity</th>
               <th>Price</th>
               <th>Action</th>
@@ -185,7 +185,7 @@ return (
         className="bg-green-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded"
         onClick={logout}
       >
-        🚪 Logout
+        🚪 Logout here
       </button>
     </div>
   </div>
