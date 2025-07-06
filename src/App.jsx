@@ -167,7 +167,7 @@ function App() {
     {/* ✅ Move logout here, outside the table */}
 <div className="mt-auto text-center pt-6">
   <button
-    className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded"
+    className="bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded"
     onClick={logout}
   >
     🚪 Logout
