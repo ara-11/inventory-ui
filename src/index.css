@@ -120,6 +120,7 @@ input[type="number"] {
   display: flex;
   gap: 0.5rem;
   justify-content: center;
+  margin-top: 2rem; /* ✅ Add this line */
 }
 
 table {
