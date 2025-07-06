@@ -126,7 +126,7 @@ return (
     />
 
     {/* ✅ Wrap all the content above logout in flex-grow */}
-    <div className="container">
+    <div className="content" style={{ flexGrow: 1 }}>
       {loading && <p>⏳ Loading products...</p>}
       {error && <p className="text-red-500">❌ {error}</p>}
 
@@ -178,19 +178,14 @@ return (
         </table>
       )}
     </div>
-
-    {/* ✅ This is now pushed to bottom */}
+    {/* ✅ This will now stay at the bottom of the white box */}
     <div className="action-buttons">
-      <button
-        onClick={logout}
-      >
-        🚪 Logout
-      </button>
+      <button onClick={logout}>🚪 Logout</button>
     </div>
   </div>
 );
 
-
+{/* note: I didn't use tailwind here, just css */}
 }
 
 export default App;
