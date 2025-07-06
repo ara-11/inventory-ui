@@ -180,12 +180,11 @@ return (
     </div>
 
     {/* ✅ This is now pushed to bottom */}
-    <div className="mt-auto text-center pt-6">
+    <div className="action-buttons">
       <button
-        className="bg-green-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded"
         onClick={logout}
       >
-        🚪 Logout here
+        🚪 Logout
       </button>
     </div>
   </div>
