@@ -38,6 +38,7 @@ a:hover {
 body {
   margin: 0;
   display: flex;
+  justify-content: center; /* ✅ horizontal center */
   flex-direction: column;
   align-items: center;
   min-width: 320px;
@@ -86,7 +87,7 @@ button:focus-visible {
 
   display: flex;
   flex-direction: column;
-  min-height: 80vh; /* ✅ Ensures there's space to push logout down */
+  min-height: 100vh; /* ✅ Ensures there's space to push logout down *//* ✅ full height of screen */
 }
 
 .form {
