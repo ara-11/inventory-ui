@@ -81,6 +81,10 @@ button:focus-visible {
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh; /* ✅ Ensures there's space to push logout down */
 }
 
 .form {
