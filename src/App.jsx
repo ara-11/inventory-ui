@@ -135,7 +135,7 @@ return (
           <thead>
             <tr>
               <th>ID</th>
-              <th>Name</th>
+              <th>Names</th>
               <th>Quantity</th>
               <th>Price</th>
               <th>Action</th>
