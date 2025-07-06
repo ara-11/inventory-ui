@@ -178,14 +178,19 @@ return (
         </table>
       )}
     </div>
+
     {/* ✅ This will now stay at the bottom of the white box */}
     <div className="action-buttons">
       <button onClick={logout}>🚪 Logout</button>
+            <button
+        type="submit">
+        {productToEdit ? 'Update Product' : 'Add Product'}
+      </button>
     </div>
+    
   </div>
 );
 
-{/* note: I didn't use tailwind here, just css */}
 }
 
 export default App;
