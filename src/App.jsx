@@ -126,8 +126,7 @@ function App() {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-
-      {loading && <p>⏳ Loading products...</p>}
+<div classname = "flex-grow">      {loading && <p>⏳ Loading products...</p>}
       {error && <p className="text-red-500">❌ {error}</p>}
 
       {!loading && products.length > 0 && (
@@ -163,18 +162,21 @@ function App() {
         </table>
         
       )}
+      </div>
+
 
     {/* ✅ Move logout here, outside the table */}
+    {/* ✅ This is now pushed to bottom */}
 <div className="mt-auto text-center pt-6">
   <button
-    className="bg-green-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded"
+    className="bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded"
     onClick={logout}
   >
     🚪 Logout
   </button>
 </div>
 
-    </div>
+</div>
   );
 }
 
