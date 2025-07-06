@@ -107,26 +107,27 @@ function App() {
   if (!loggedIn) {
     return <Login onLogin={() => setLoggedIn(true)} />; //test comment
   }
+return (
+  <div className="container">
+    <h1>📦 Inventory System</h1>
 
-  return (
-    <div className="container">
-      <h1>📦 Inventory System</h1>
+    <ProductForm
+      onSave={saveProduct}
+      productToEdit={editingProduct}
+      onCancel={() => setEditingProduct(null)}
+    />
 
+    <input
+      type="text"
+      className="w-[300px] border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 mb-4"
+      placeholder="Search product..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
 
-      <ProductForm
-        onSave={saveProduct}
-        productToEdit={editingProduct}
-        onCancel={() => setEditingProduct(null)}
-      />
-
-      <input
-        type="text"
-        className="w-[300px] border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 mb-4"
-        placeholder="Search product..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-<div classname = "flex-grow">      {loading && <p>⏳ Loading products...</p>}
+    {/* ✅ Wrap all the content above logout in flex-grow */}
+    <div className="flex-grow">
+      {loading && <p>⏳ Loading products...</p>}
       {error && <p className="text-red-500">❌ {error}</p>}
 
       {!loading && products.length > 0 && (
@@ -146,38 +147,51 @@ function App() {
                 p.name.toLowerCase().includes(searchTerm.toLowerCase())
               )
               .map((p) => (
-                <tr key={p.id} style={{ backgroundColor: editingProduct?.id === p.id ? '#eef' : 'transparent' }}>
+                <tr
+                  key={p.id}
+                  style={{
+                    backgroundColor:
+                      editingProduct?.id === p.id ? '#eef' : 'transparent',
+                  }}
+                >
                   <td>{p.id}</td>
                   <td>{p.name}</td>
                   <td>{p.quantity}</td>
                   <td>₱{p.price}</td>
                   <td className="action-buttons">
-                    <button className="edit-button" onClick={() => setEditingProduct(p)}>Edit</button>
-                    <button className="delete-button" onClick={() => deleteProduct(p.id)}>Delete</button>
+                    <button
+                      className="edit-button"
+                      onClick={() => setEditingProduct(p)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="delete-button"
+                      onClick={() => deleteProduct(p.id)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
           </tbody>
-
         </table>
-        
       )}
-      </div>
+    </div>
 
-
-    {/* ✅ Move logout here, outside the table */}
     {/* ✅ This is now pushed to bottom */}
-<div className="mt-auto text-center pt-6">
-  <button
-    className="bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded"
-    onClick={logout}
-  >
-    🚪 Logout
-  </button>
-</div>
+    <div className="mt-auto text-center pt-6">
+      <button
+        className="bg-green-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded"
+        onClick={logout}
+      >
+        🚪 Logout
+      </button>
+    </div>
+  </div>
+);
 
-</div>
-  );
+
 }
 
 export default App;
