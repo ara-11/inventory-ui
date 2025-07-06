@@ -126,7 +126,7 @@ return (
     />
 
     {/* ✅ Wrap all the content above logout in flex-grow */}
-    <div className="flex-grow">
+    <div className="container">
       {loading && <p>⏳ Loading products...</p>}
       {error && <p className="text-red-500">❌ {error}</p>}
 
